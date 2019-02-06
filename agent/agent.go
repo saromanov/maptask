@@ -39,3 +39,24 @@ func (a*Agent) Start() error {
 	}
 	fmt.Printf("Agent server is started at %s %s\n", a.conf.Host, a.conf.Port)
 }
+
+func (a*Agent) writeConnection(reader io.Reader, writerName, channelName string, readerCount int) {
+		messageWriter := NewBufferedMessageWriter(dsStore, 1000)
+	
+		for {
+	
+			message, err := util.ReadMessage(reader)
+			if err == io.EOF {
+				break
+			}
+			if err == nil {
+				count += int64(len(message))
+				messageWriter.WriteMessage(message)
+			} else {
+				log.Printf("on disk %s Failed to write to %s: %v", writerName, channelName, err)
+			}
+		}
+	
+	
+	}
+}
