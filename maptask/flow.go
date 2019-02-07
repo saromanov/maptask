@@ -9,3 +9,14 @@ type Flow struct {
 func NewText(text string) *Flow {
 	return &Flow{}
 }
+
+// Map provides mapping of the function
+func (f* Flow) Map(name string, fn func(interface{}) error) *Flow{
+	return f
+}
+
+// Reduce
+func (f* Flow) Reduce(name string, fn func(interface{}) error) *Flow{
+	return f
+}
+
