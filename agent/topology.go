@@ -8,14 +8,14 @@ type AgentInfo struct {
 
 // Stand contains group of Agents
 type Stand struct {
-	sync.RWMutex
+	mu     *sync.RWMutex
 	Name   string
 	Agents map[string]*AgentInfo
 }
 
 // DataCenter contains group of Stands
 type DataCenter struct {
-	sync.RWMutex
+	mu     *sync.RWMutex
 	Name   string
 	Stands map[string]*Stand
 }
@@ -30,6 +30,16 @@ type Topology struct {
 func NewTopology() *Topology {
 	return &Topology{
 		mu:          &sync.Mutex{},
-		DataCenters: map[string]*DataCenter{},
+		DataCenters: make(map[string]*DataCenter),
+	}
+}
+
+// NewDataCenter create s anew data center
+func NewDataCenter(name string) *DataCenter {
+	return &DataCenter{
+		mu:          &sync.Mutex{},
+		Name :name,
+		Stands: make(map[string]*Stand)m
+
 	}
 }
