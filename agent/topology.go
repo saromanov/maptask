@@ -34,12 +34,20 @@ func NewTopology() *Topology {
 	}
 }
 
-// NewDataCenter create s anew data center
+// NewDataCenter creates a new data center
 func NewDataCenter(name string) *DataCenter {
 	return &DataCenter{
-		mu:          &sync.Mutex{},
-		Name :name,
-		Stands: make(map[string]*Stand)m
+		mu:     &sync.Mutex{},
+		Name:   name,
+		Stands: make(map[string]*Stand),
+	}
+}
 
+// NewStand create new stand
+func NewStand(name string) *Stand {
+	return &Stand{
+		mu:     &sync.Mutex{},
+		Name:   name,
+		Agents: make(map[string]*AgentInfo),
 	}
 }
