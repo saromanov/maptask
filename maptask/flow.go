@@ -14,7 +14,12 @@ func NewText(text string) *Flow {
 }
 
 // Map provides mapping of the function
-func (f *Flow) Map(name string, fn func(interface{}) error) *Flow {
+func (f *Flow) Map(name string, fn func([]interface{}) error) *Flow {
+	step := &Step{
+		Name: name,
+		Fn:   fn,
+	}
+	f.steps = append(f.steps, step)
 	return f
 }
 
