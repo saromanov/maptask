@@ -1,5 +1,7 @@
 package maptask
 
+import "context"
+
 // Flow defines the main flow for the app
 type Flow struct {
 	steps []*Step
@@ -21,6 +23,15 @@ func (f *Flow) Map(name string, fn func([]interface{}) error) *Flow {
 	}
 	f.steps = append(f.steps, step)
 	return f
+}
+
+// Run provides excecuting of the flow
+func (f *Flow) Run(c *context.Context) error {
+	return f.run(c)
+}
+
+func (f *Flow) run(c *context.Context) error {
+	return nil
 }
 
 // Reduce
