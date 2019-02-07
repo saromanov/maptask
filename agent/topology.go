@@ -22,6 +22,14 @@ type DataCenter struct {
 
 // Topology defines representation of datacenters
 type Topology struct {
-	sync.RWMutex
+	mu          *sync.RWMutex
 	DataCenters map[string]*DataCenter
+}
+
+// NewTopology creates topology instance
+func NewTopology() *Topology {
+	return &Topology{
+		mu:          &sync.Mutex{},
+		DataCenters: map[string]*DataCenter{},
+	}
 }
