@@ -35,6 +35,11 @@ func (f *Flow) run(c *context.Context) error {
 }
 
 // Reduce
-func (f *Flow) Reduce(name string, fn func(interface{}) error) *Flow {
+func (f *Flow) Reduce(name string, fn func([]interface{}) error) *Flow {
+	step := &Step{
+		Name: name,
+		Fn:   fn,
+	}
+	f.steps = append(f.steps, step)
 	return f
 }
