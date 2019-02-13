@@ -8,7 +8,7 @@ type Dataset struct {
 // newDataset provides initialization of the dataset
 func newDataset(f *Flow) *Dataset {
 	d := &Dataset{
-		Flow: context,
+		Flow: f,
 	}
 	return d
 }

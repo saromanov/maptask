@@ -5,6 +5,7 @@ import "context"
 // Flow defines the main flow for the app
 type Flow struct {
 	steps []*Step
+	name  string
 }
 
 // NewText provides initialization of the flow
@@ -15,11 +16,12 @@ func NewText(text string) *Flow {
 	}
 }
 
-// NewFile provides initialization of the flow
-// with reading data from the file
-func NewFile(path string) *Flow {
+// New provides initialization of the flow
+// with name
+func New(name string) *Flow {
 	return &Flow{
 		steps: []*Step{},
+		name:  name,
 	}
 }
 
