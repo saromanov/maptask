@@ -15,6 +15,14 @@ func NewText(text string) *Flow {
 	}
 }
 
+// NewFile provides initialization of the flow
+// with reading data from the file
+func NewFile(path string) *Flow {
+	return &Flow{
+		steps: []*Step{},
+	}
+}
+
 // Map provides mapping of the function
 func (f *Flow) Map(name string, fn func([]interface{}) error) *Flow {
 	step := &Step{
