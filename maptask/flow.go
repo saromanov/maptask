@@ -2,6 +2,7 @@ package maptask
 
 import (
 	"context"
+	"fmt"
 	"os"
 )
 
@@ -30,8 +31,8 @@ func New(name string) *Flow {
 
 // Read provides reading of the data from file
 func (f *Flow) Read(path string) error {
-	if _, err := os.Stat(path; os.IsNotExist(err) {
-		return fmt.Errorf("file is not exist: %v", err)	
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return fmt.Errorf("file is not exist: %v", err)
 	}
 	return nil
 }
