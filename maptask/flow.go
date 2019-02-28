@@ -1,6 +1,9 @@
 package maptask
 
-import "context"
+import (
+	"context"
+	"os"
+)
 
 // Flow defines the main flow for the app
 type Flow struct {
@@ -23,6 +26,14 @@ func New(name string) *Flow {
 		steps: []*Step{},
 		name:  name,
 	}
+}
+
+// Read provides reading of the data from file
+func (f *Flow) Read(path string) error {
+	if _, err := os.Stat(path; os.IsNotExist(err) {
+		return fmt.Errorf("file is not exist: %v", err)	
+	}
+	return nil
 }
 
 // Map provides mapping of the function
