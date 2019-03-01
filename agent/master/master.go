@@ -48,6 +48,6 @@ func Run(address string) {
 func newServer()*Server {
 	return &Server{
 		startTime: time.Now().UTC(),
-
+		Topology: agent.NewTopology(),
 	}
 }
