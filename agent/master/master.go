@@ -2,13 +2,21 @@
 package master
 
 import (
+	"time"
 	"log"
 	"net"
 	"net/http"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"github.com/gorilla/mux"
+	"github.com/saromanov/maptask/agent"
 )
+
+// Server defines configuration for master server
+type Server struct {
+	startTime time.Time
+	Topology *agent.Topology
+}
 
 // Run provides running of the master
 func Run(address string) {
@@ -18,6 +26,7 @@ func Run(address string) {
 	}
 	defer listener.Close()
 
+	server = newServer()
 	grpcServer := grpc.NewServer()
 	pb.RegisterMasterServer(grpcServer, masterServer)
 	reflection.Register(grpcS)
@@ -32,5 +41,13 @@ func Run(address string) {
 
 	if err := m.Serve(); err != nil {
 		log.Fatalf("master server failed to serve: %v", err)
+	}
+}
+
+// newServer creates master server
+func newServer()*Server {
+	return &Server{
+		startTime: time.Now().UTC(),
+
 	}
 }
