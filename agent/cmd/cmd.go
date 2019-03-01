@@ -1,27 +1,40 @@
+package main
+
 import (
 	"context"
 	"fmt"
 	"os"
 	"errors"
 
-	"github.com/saromanov/maptask/master"
+	"github.com/saromanov/maptask/agent/master"
 	"github.com/urfave/cli"
 	"golang.org/x/oauth2"
 )
 
+// Config defines configuration for maptask
+type Config struct {
+	MasterServer string
+}
+
 // parseConfig provides parsing of the config .yml file
-func parseConfig(path string) (*structs.Config, error) {
+func parseConfig(path string) (*Config, error) {
 	yamlFile, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("unable to open config file: %v", err)
 	}
-	var c *structs.Config
+	var c *Config
 	err = yaml.Unmarshal(yamlFile, &c)
 	if err != nil {
 		return nil, fmt.Errorf("unable to parse .config.yml: %v", err)
 	}
 
 	return c, nil
+}
+
+func run(c *Config) {
+	if c.MasterServer != "" {
+		master.Run(c.MasterServer)
+	}
 }
 
 func main() {
