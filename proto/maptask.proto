@@ -1,0 +1,13 @@
+syntax = "proto3";
+package maptask;
+
+service MapTask {
+    rpc Heartbeat(HeartbeatRequest) returns (HeartbeatResponse);
+}
+
+message HeartbeatRequest {
+}
+
+message HeartbeatResponse {
+    
+}
