@@ -36,7 +36,7 @@ func Run(address string) {
 	r.HandleFunc("/job/{id:[0-9]+}", masterServer.jobStatusHandler)
 	server := &http.Server{Handler: r}
 
-	go grpcServer.Serve(grpcL)
+	go grpcServer.Serve(listener)
 	go server.Serve(httpL)
 
 	if err := m.Serve(); err != nil {
