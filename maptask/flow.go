@@ -34,6 +34,10 @@ func (f *Flow) Read(path string) error {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		return fmt.Errorf("file is not exist: %v", err)
 	}
+	f.steps = append(f.steps, &Step{
+		Name: "input",
+		Type: Input,
+	})
 	return nil
 }
 
@@ -42,6 +46,7 @@ func (f *Flow) Map(name string, fn func([]interface{}) error) *Flow {
 	step := &Step{
 		Name: name,
 		Fn:   fn,
+		Type: Mapper,
 	}
 	f.steps = append(f.steps, step)
 	return f
@@ -61,6 +66,7 @@ func (f *Flow) Reduce(name string, fn func([]interface{}) error) *Flow {
 	step := &Step{
 		Name: name,
 		Fn:   fn,
+		Type: Reducer,
 	}
 	f.steps = append(f.steps, step)
 	return f
