@@ -11,3 +11,7 @@ message HeartbeatRequest {
 message HeartbeatResponse {
     
 }
+
+message FlowStep {
+    string path = 1;
+}
