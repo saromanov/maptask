@@ -8,8 +8,9 @@ import (
 
 // Flow defines the main flow for the app
 type Flow struct {
-	steps []*Step
-	name  string
+	steps  []*Step
+	name   string
+	shards int
 }
 
 // NewText provides initialization of the flow
@@ -52,12 +53,18 @@ func (f *Flow) Map(name string, fn func([]interface{}) error) *Flow {
 	return f
 }
 
+// AddShardsCount provides adding of the shards count to the flow
+func (f *Flow) AddShardsCount(num int) {
+	f.shards = num
+}
+
 // Run provides excecuting of the flow
 func (f *Flow) Run(c *context.Context) error {
 	return f.run(c)
 }
 
 func (f *Flow) run(c *context.Context) error {
+
 	return nil
 }
 
