@@ -7,6 +7,7 @@ import (
 	"errors"
 
 	"github.com/saromanov/maptask/agent/master"
+	"github.com/saromanov/maptask/agent"
 	"github.com/urfave/cli"
 	"golang.org/x/oauth2"
 )
@@ -34,6 +35,11 @@ func parseConfig(path string) (*Config, error) {
 func run(c *Config) {
 	if c.MasterServer != "" {
 		master.Run(c.MasterServer)
+	}
+
+	ag := agent.New(c)
+	if err := ag.Start(); err != nil {
+		panic(err)
 	}
 }
 
