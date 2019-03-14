@@ -52,11 +52,8 @@ func (a*Agent) writeConnection(reader io.Reader, writerName, channelName string,
 			if err == nil {
 				count += int64(len(message))
 				messageWriter.WriteMessage(message)
-			} else {
-				log.Printf("on disk %s Failed to write to %s: %v", writerName, channelName, err)
+				continue
 			}
+			log.Printf("on disk %s Failed to write to %s: %v", writerName, channelName, err)
 		}
-	
-	
-	}
 }

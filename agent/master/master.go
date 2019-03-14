@@ -18,8 +18,8 @@ type Server struct {
 	Topology *agent.Topology
 }
 
-// Run provides running of the master
-func Run(address string) {
+// Start provides running of the master
+func Start(address string) {
 	listener, err := net.Listen("tcp", address)
 	if err != nil {
 		log.Fatalf("unable to create master server: %v", err)
