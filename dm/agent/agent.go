@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"path/filepath"
 	"net"
+	"log"
 )
 // Config defines configuration for Agent
 type Config struct {
