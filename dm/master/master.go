@@ -20,6 +20,9 @@ type Server struct {
 
 // Start provides running of the master
 func Start(address string) {
+	if address == "" {
+		panic("address is not defined")
+	}
 	listener, err := net.Listen("tcp", address)
 	if err != nil {
 		log.Fatalf("unable to create master server: %v", err)
